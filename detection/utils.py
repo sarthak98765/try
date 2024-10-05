@@ -10,7 +10,7 @@ import gdown
 
 # Define the Google Drive file ID and the destination path
 file_id = "1GcoUqB6WhT0BeqD4nbqVJy4yJfO61v4Z"
-model_path = "detection/models/model.h5"
+model_path = "detection/"
 
 # Check if the model file exists locally; if not, download it
 if not os.path.exists(model_path):
