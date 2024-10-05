@@ -8,3 +8,4 @@ numpy
 scipy
 h5py
 django-cors-headers
+gdown
