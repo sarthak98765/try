@@ -111,15 +111,15 @@
             box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease;
             margin-top: 20px; /* Gap between button and uploaded image */
+            display: none; /* Hide initially */
+        }
+
+        .right-content img.uploaded-image {
+            display: block; /* Show the uploaded image */
         }
 
         .right-content img:hover {
             transform: scale(1.05);
-        }
-
-        /* Hide the uploaded image initially */
-        .uploaded-image {
-            display: none;
         }
     </style>
     <script>
@@ -134,7 +134,6 @@
                     reader.onload = function (e) {
                         uploadedImage.src = e.target.result; // Set image source to the uploaded file
                         uploadedImage.classList.add('uploaded-image'); // Show the uploaded image
-                        uploadedImage.style.display = 'block'; // Display the image
                     }
                     reader.readAsDataURL(file); // Read file as data URL
                 }
@@ -145,7 +144,7 @@
 <body>
     <!-- Navbar -->
     <div class="navbar">
-        <a href="">Home</a> <!-- Centered link without form -->
+        <a href="/">Home</a> <!-- Centered link to home page -->
     </div>
 
     <!-- Main Content -->
@@ -162,7 +161,7 @@
 
         <!-- Right Side: Image Section -->
         <div class="right-content">
-            <img src="" alt="">
+            <img src="" alt="Uploaded Image Preview">
         </div>
     </div>
 </body>
