@@ -2,9 +2,23 @@ import numpy as np
 from keras.preprocessing import image
 from keras.models import load_model
 from PIL import Image
+import os
+import gdown
 
 # Load your model
-model = load_model("detection/models/model.h5")  # Update the path to your model
+# model = load_model("detection/models/model.h5")  # Update the path to your model
+
+# Define the Google Drive file ID and the destination path
+file_id = "1GcoUqB6WhT0BeqD4nbqVJy4yJfO61v4Z"
+model_path = "detection/models/model.h5"
+
+# Check if the model file exists locally; if not, download it
+if not os.path.exists(model_path):
+    print("Downloading model from Google Drive...")
+    gdown.download(f"https://drive.google.com/uc?id={file_id}", model_path, quiet=False)
+
+# Load your model
+model = load_model(model_path)
 
 def predict_class(img_path):
     img = Image.open(img_path)
