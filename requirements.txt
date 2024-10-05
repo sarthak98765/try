@@ -1,0 +1,10 @@
+Django
+djangorestframework
+tensorflow
+keras
+gunicorn
+pillow
+numpy
+scipy
+h5py
+django-cors-headers

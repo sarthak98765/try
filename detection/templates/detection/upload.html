@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Lung Cancer Image</title>
+    <style>
+        /* General Reset */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #00264d;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            background-color: #001a33; /* Match with result.html */
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex; /* Use flexbox for layout */
+            justify-content: center; /* Center items horizontally */
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: bold;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main content container */
+        .container {
+            display: flex;
+            flex-direction: column; 
+            justify-content: space-between;
+            align-items: center;
+            padding: 10rem;
+            flex-grow: 1;
+        }
+
+        /* Left side content */
+        .left-content {
+            flex-basis: 50%;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: #dfd5d5;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        input[type="file"] {
+            padding: 1rem;
+            border: 2px solid #ccc;
+            background-color: #f8f9fa;
+            cursor: pointer;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        input[type="file"]:hover {
+            border-color: #007bff;
+            background-color: #e0e0e0;
+        }
+
+        button[type="submit"] {
+            padding: 1rem;
+            border: 2px solid #ccc;
+            background-color: gray;
+            color: white;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #555;
+        }
+
+        /* Right side image */
+        .right-content {
+            flex-basis: 40%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 2rem; /* Add margin to create space above */
+        }
+
+        .right-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            margin-top: 20px; /* Gap between button and uploaded image */
+        }
+
+        .right-content img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Hide the uploaded image initially */
+        .uploaded-image {
+            display: none;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const fileInput = document.querySelector('input[type="file"]');
+            const uploadedImage = document.querySelector('.right-content img');
+
+            fileInput.addEventListener('change', function () {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        uploadedImage.src = e.target.result; // Set image source to the uploaded file
+                        uploadedImage.classList.add('uploaded-image'); // Show the uploaded image
+                        uploadedImage.style.display = 'block'; // Display the image
+                    }
+                    reader.readAsDataURL(file); // Read file as data URL
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="">Home</a> <!-- Centered link without form -->
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Left Side: Upload Section -->
+        <div class="left-content">
+            <h1>Upload Image</h1>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" name="image" required>
+                <button type="submit">Upload</button>
+            </form>
+        </div>
+
+        <!-- Right Side: Image Section -->
+        <div class="right-content">
+            <img src="" alt="">
+        </div>
+    </div>
+</body>
+</html>
