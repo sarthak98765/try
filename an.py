@@ -313,14 +313,12 @@ class MAryTree:
         return self.lock(name, user_id)
 
 
+
 # --- Main Function for General Input ---
 def main():
-    input = sys.stdin.read
-    data = input().splitlines()
-    
-    n, m, q = map(int, data[0].split())
-    names = data[1].split()
-    queries = [tuple(data[i].split()) for i in range(2, 2 + q)]
+    n, m, q = map(int, input().split())
+    names = input().split()
+    queries = [tuple(input().split()) for _ in range(q)]
 
     tree = MAryTree(names[0])
     tree.make_m_ary_tree(names, m)
@@ -334,7 +332,5 @@ def main():
         elif op_type == 3:
             print(tree.upgrade(name, user_id))
 
-
-# Example for running manually:
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()
